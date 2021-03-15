@@ -3,6 +3,10 @@
  */
 package ud05arrays;
 
+import java.util.Iterator;
+
+import helpers.Helper;
+
 /**
  * @author eserrano
  *
@@ -50,7 +54,14 @@ public class Ud5Ejercicio1 {
 	 * @return Nuevo array con las Bolas creadas.
 	 */
 	public static Bola[] crearBolas(float[][] datosBolas) {
-		return null;
+		Bola[] retorno = new Bola[datosBolas.length];
+
+		int i = 0;
+		for (float[] fs : datosBolas) {
+			retorno[i++] = new Bola(fs[0],fs[1]);
+		}
+
+		return retorno;
 	}
 	
 
@@ -65,7 +76,9 @@ public class Ud5Ejercicio1 {
 	public static void imprimeBolas(Bola[] array, String titulo) {
 		System.out.println(titulo + ": --------------------");
 		
-		//TODO sobrescribe el comentario para hacer lo que el metodo pide
+		for (Bola bola : array) {
+			System.out.println(bola);
+		}
 		
 		System.out.println("-----------------------------");
 	}
@@ -83,8 +96,15 @@ public class Ud5Ejercicio1 {
 	 * @return copia ordenada del array pasado como parametro
 	 */
 	public static Bola[] ordena(final Bola[] array) {
-		
-		return null;
+		Bola[] retorno = array.clone();
+		for (int i = 0; i < retorno.length; i++) {
+			for (int j = i + 1; j < retorno.length; j++) {
+				if (retorno[j].compareTo(retorno[i]) > 0) {
+					Helper.swap(retorno, i, j);
+				}
+			}
+		}
+		return retorno;
 	}
 	
 	/**
@@ -103,7 +123,27 @@ public class Ud5Ejercicio1 {
 	 * @return nuevo array con los elementos no eliminados.
 	 */
 	public static Bola[] eliminaBolas(float diametro, float peso,final Bola[] array) {
-		return null;
+		Bola[] retorno = array.clone();
+		Bola recibida = new Bola(diametro, peso);
+		int borrados = 0;
+		
+		for (int i = 0; i < retorno.length; i++) {
+			if (recibida.equals(retorno[i])) {
+				retorno[i] = null;
+				borrados++;
+			}
+		}
+		
+		Bola[] nuevo = new Bola[retorno.length - borrados];
+		
+		int j = 0;
+		for (int i = 0; i < retorno.length; i++) {
+			if (retorno[i] != null) {
+				nuevo[j++] = retorno[i];
+			}
+		}
+		
+		return nuevo;
 	}
 	
 	
